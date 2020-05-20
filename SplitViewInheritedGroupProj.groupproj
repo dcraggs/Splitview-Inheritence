@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{17E0F4C5-00BA-4F37-9D04-3F2E32E8EBC5}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="SplitView.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="SplitViewInherited.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="SplitView">
+        <MSBuild Projects="SplitView.dproj"/>
+    </Target>
+    <Target Name="SplitView:Clean">
+        <MSBuild Projects="SplitView.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SplitView:Make">
+        <MSBuild Projects="SplitView.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SplitViewInherited">
+        <MSBuild Projects="SplitViewInherited.dproj"/>
+    </Target>
+    <Target Name="SplitViewInherited:Clean">
+        <MSBuild Projects="SplitViewInherited.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SplitViewInherited:Make">
+        <MSBuild Projects="SplitViewInherited.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="SplitView;SplitViewInherited"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="SplitView:Clean;SplitViewInherited:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="SplitView:Make;SplitViewInherited:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
